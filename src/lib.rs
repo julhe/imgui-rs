@@ -135,14 +135,10 @@ impl<'ui> Ui<'ui> {
             &*(sys::igGetDrawData() as *mut DrawData)
         }
     }
-}
 
-impl<'a> Drop for Ui<'a> {
-    fn drop(&mut self) {
-        if !thread::panicking() {
-            unsafe {
-                sys::igEndFrame();
-            }
+    pub fn end_frame(self) {
+        unsafe {
+            sys::igEndFrame();
         }
     }
 }
